@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros Instagram — Dr. Alfonso Sempertegui</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e2a;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #c8cdd8;
+    --text-dim: #5a6070;
+    --text-bright: #f0f2f7;
+    --blue: #4f8ef7;
+    --blue-dim: rgba(79,142,247,0.12);
+    --green: #3ecf8e;
+    --green-dim: rgba(62,207,142,0.12);
+    --orange: #f5a623;
+    --orange-dim: rgba(245,166,35,0.12);
+    --red: #e55353;
+    --red-dim: rgba(229,83,83,0.12);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.12);
+    --teal: #22d3ee;
+    --teal-dim: rgba(34,211,238,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 60px 40px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .header-title-block {}
+
+  .header-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .site-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 span {
+    color: var(--blue);
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .header-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .hbadge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hbadge.blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(79,142,247,0.2); }
+  .hbadge.green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(62,207,142,0.2); }
+  .hbadge.orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,166,35,0.2); }
+
+  .header-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: var(--bg3);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  /* CONTENT AREA */
+  .content-area {
+    padding: 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* SECTION LABEL */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .section-heading:first-child { margin-top: 0; }
+
+  .section-heading h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .cards-grid.single { grid-template-columns: 1fr; }
+
+  /* CARD */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  /* CARD HEADER */
+  .card-head {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .card-num-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .card-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dim);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-title-area {}
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tag.viral { background: var(--orange-dim); color: var(--orange); }
+  .tag.edu { background: var(--blue-dim); color: var(--blue); }
+  .tag.story { background: var(--purple-dim); color: var(--purple); }
+  .tag.inst { background: var(--teal-dim); color: var(--teal); }
+  .tag.pessoal { background: var(--green-dim); color: var(--green); }
+  .tag.alerta { background: var(--red-dim); color: var(--red); }
+  .tag.sug { background: rgba(120,120,140,0.12); color: #9098b0; }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    line-height: 1.4;
+  }
+
+  /* CARD META */
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0 24px 16px 76px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ACCORDION */
+  .accordion {}
+
+  .acc-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .acc-item:last-child { border-bottom: none; }
+
+  .acc-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: background 0.15s;
+  }
+
+  .acc-trigger:hover { background: rgba(255,255,255,0.02); }
+
+  .acc-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .acc-icon {
+    font-size: 14px;
+  }
+
+  .acc-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .acc-arrow {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    font-weight: 600;
+    transition: transform 0.3s, background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .acc-item.open .acc-arrow {
+    transform: rotate(45deg);
+    background: var(--blue-dim);
+    border-color: rgba(79,142,247,0.3);
+    color: var(--blue);
+  }
+
+  .acc-body {
+    display: none;
+    padding: 0 24px 20px;
+    animation: accFade 0.25s ease;
+  }
+
+  .acc-item.open .acc-body { display: block; }
+
+  @keyframes accFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CONTENT TYPES */
+  .hook-block {
+    background: rgba(79,142,247,0.06);
+    border: 1px solid rgba(79,142,247,0.15);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--text-bright);
+    line-height: 1.6;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hook-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .script-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+
+  .script-block p {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  .script-block p:last-child { margin-bottom: 0; }
+
+  .script-block strong {
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+
+  .script-block em {
+    color: var(--purple);
+    font-style: italic;
+  }
+
+  .script-quote {
+    border-left: 2px solid var(--purple);
+    padding-left: 12px;
+    font-size: 14px;
+    color: var(--purple);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .pillar {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .pillar-num {
+    width: 24px; height: 24px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pillar-content {}
+
+  .pillar-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 3px;
+  }
+
+  .pillar-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .cta-block {
+    background: rgba(62,207,142,0.06);
+    border: 1px solid rgba(62,207,142,0.15);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .cta-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .cta-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text-bright);
+    font-style: italic;
+  }
+
+  .prod-block {
+    background: rgba(167,139,250,0.06);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .prod-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .prod-block p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .spacer { height: 12px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--bg2);
+  }
+
+  .footer-left {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .footer-left strong {
+    color: var(--text);
+  }
+
+  .footer-right {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    .site-header, .content-area, footer { padding-left: 20px; padding-right: 20px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .header-stats { grid-template-columns: repeat(2, 1fr); }
+    .card-meta { padding-left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div class="header-title-block">
+      <div class="header-eyebrow">
+        <div class="eyebrow-dot"></div>
+        ASC Plástica · Conteúdo Instagram
+      </div>
+      <h1>Roteiros <span>Dr. Alfonso</span><br>Sempertegui</h1>
+      <p class="header-subtitle">10 roteiros para Reels e vídeos institucionais · Belo Horizonte</p>
+    </div>
+    <div class="header-badges">
+      <div class="hbadge blue">🏥 Cirurgia Plástica</div>
+      <div class="hbadge green">🎬 10 Vídeos</div>
+      <div class="hbadge orange">📱 Reels / Instagram</div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-item">
+      <div class="stat-num">+30</div>
+      <div class="stat-label">Anos de experiência</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Roteiros produzidos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">SBCP</div>
+      <div class="stat-label">Membro SBCP-MG</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">ASC</div>
+      <div class="stat-label">Aesthetic Surgery Center</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-area">
+
+  <div class="section-heading">
+    <h2>📋 Roteiros Solicitados</h2>
+  </div>
+
+  <!-- CARDS ROW 1 -->
+  <div class="cards-grid">
+
+    <!-- CARD 01 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">01</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag alerta">⚠️ Alerta</span>
+              <span class="tag edu">🧠 Educativo</span>
+              <span class="tag viral">🔥 Viral</span>
+            </div>
+            <h3>3 erros que podem comprometer — ou custar — seu resultado cirúrgico</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels</strong></div>
+        <div class="meta-item">⏱ <strong>70 a 85s</strong></div>
+        <div class="meta-item">🎥 <strong>Consultório, jaleco</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook — 0 a 3 seg</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-label">Olha direto para câmera</div>
+            <div class="hook-block">"Você já marcou sua cirurgia. Mas esses três erros podem te custar muito mais do que dinheiro. Podem custar sua saúde."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Roteiro Completo</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-num">1</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Escolher pelo preço</div>
+                  <div class="pillar-desc">Cirurgia plástica não é commodity. Quando você prioriza o preço, abre mão de segurança. Já vi casos em que pacientes foram operadas em clínicas clandestinas, sem estrutura de emergência, sem anestesista qualificado. O resultado? Infecções graves, necroses e, em situações extremas, o risco de vida real. O barato pode custar muito mais do que você imagina.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">2</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Esconder informações do médico</div>
+                  <div class="pillar-desc">Remédio que você toma, cigarro, suplemento, anticoncepcional... tudo isso interfere diretamente na cirurgia e na anestesia. Ocultar informações pode provocar interações medicamentosas perigosas, aumentar o risco de trombose, comprometer a cicatrização e até causar complicações anestésicas fatais. Seja completamente honesto com seu cirurgião. Essa conversa pode salvar sua vida.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">3</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Negligenciar o pós-operatório</div>
+                  <div class="pillar-desc">A cirurgia é 50% do processo. Quem ignora o pós-op abre espaço para infecções, seroma, deiscência de sutura e trombose venosa profunda, que pode evoluir para embolia pulmonar, uma das principais causas de morte pós-cirúrgica. Usar cinta, evitar esforço, tomar os medicamentos no horário certo, comparecer às revisões não é capricho. É protocolo de segurança.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"Trinta anos operando me ensinaram que informação salva vidas. Me segue aqui, toda semana eu trago conteúdo de verdade sobre cirurgia plástica segura."</p>
+              <div class="spacer"></div>
+              <p>💬 Texto na tela: @ascplastica · 📍 Belo Horizonte</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CARD 02 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">02</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag edu">🧠 Educativo</span>
+              <span class="tag story">📖 Antes e Depois</span>
+            </div>
+            <h3>Antes e depois com explicação técnica — Lifting Facial</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels ou Carrossel</strong></div>
+        <div class="meta-item">⏱ <strong>75 a 90s</strong></div>
+        <div class="meta-item">🎥 <strong>Consultório com imagens</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook — 0 a 3 seg</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-label">Mostrar imagem antes e depois</div>
+            <div class="hook-block">"Esse é o rosto de uma mulher de 58 anos. E esse aqui é o mesmo rosto, quatro meses depois."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Roteiro Completo</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>"Ela veio até mim com uma queixa muito comum: o rosto que ela via no espelho não refletia como ela se sentia por dentro."</p>
+              <p>"Fizemos um <strong>lifting facial</strong>. E deixa eu te explicar o que isso realmente significa."</p>
+              <p>"Com o passar dos anos, a gravidade e a perda de colágeno fazem estruturas inteiras do rosto se deslocarem. A gordura migra pra baixo, o músculo perde sustentação, a pele cede. O resultado é aquele aspecto de cansaço ou de tristeza que a pessoa não reconhece como seu."</p>
+              <p>"O lifting facial moderno não é sobre esticar pele. Isso é passado. O que a gente reposiciona hoje é o <strong>SMAS</strong>, o sistema músculo aponeurótico superficial, que é a camada profunda que sustenta toda a estrutura facial. Quando você age nessa camada, o resultado é natural, duradouro e harmonioso."</p>
+              <p>"A técnica que utilizei nela foi o <strong>SMAS plication</strong> combinada com lipoaspiração cervical e reposicionamento de gordura malar. Não houve excesso de pele removida porque o resultado bonito vem da estrutura, não da tração."</p>
+              <div class="script-quote">"O resultado? Ela rejuvenesceu, sem parecer que 'fez alguma coisa'. E é exatamente isso que buscamos."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"Quer entender se o lifting facial é indicado para você? Link na bio para agendar sua avaliação presencial aqui na ASC Plástica."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- CARD 03 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">03</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag story">📖 Storytelling</span>
+              <span class="tag pessoal">💛 Conexão</span>
+            </div>
+            <h3>Relato de caso — Prótese de Mama</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels</strong></div>
+        <div class="meta-item">⏱ <strong>75 a 90s</strong></div>
+        <div class="meta-item">🎥 <strong>Tom pessoal, sem jaleco</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook — 0 a 3 seg</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-block">"Ela entrou no meu consultório e disse: Doutor, eu não quero chamar atenção. Eu só quero me sentir completa."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Roteiro Completo</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>"Maria tinha 34 anos, dois filhos, e a amamentação havia mudado muito o volume e a forma dos seios. Ela não buscava um tamanho exagerado. Ela buscava se reconhecer de volta."</p>
+              <p>"A gente conversou muito antes de qualquer decisão. Entendemos juntos o perfil corporal dela, a proporção ideal, e escolhemos uma <strong>prótese anatômica em plano subfascial</strong>, que entrega um resultado extremamente natural, com boa projeção e sem aparência artificial."</p>
+              <p>"Por que subfascial? Porque esse plano preserva a camada fascial do peitoral, o que reduz dor no pós-operatório, diminui o risco de contraturas e dá ao implante um contorno mais suave e fisiológico."</p>
+              <div class="script-quote">"Doutor, eu me olhei no espelho e finalmente me vi."</div>
+              <p style="font-size:11px;color:var(--text-dim);letter-spacing:0.5px">↑ Pausa aqui. Deixe a frase respirar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"É pra isso que eu trabalho. Não só para transformar corpos, mas para devolver autoestima. Se você tem dúvidas sobre esse procedimento, me manda uma mensagem. Tô aqui."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CARD 04 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">04</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag pessoal">💛 Pessoal</span>
+              <span class="tag viral">🔥 Conexão</span>
+            </div>
+            <h3>Por que escolhi ser cirurgião plástico?</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels</strong></div>
+        <div class="meta-item">⏱ <strong>75 a 90s</strong></div>
+        <div class="meta-item">🎥 <strong>Ambiente íntimo, sem jaleco</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook — 0 a 3 seg</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-label">Pausa + leve sorriso</div>
+            <div class="hook-block">"Todo mundo acha que eu escolhi cirurgia plástica pelo glamour. A história real é bem mais profunda do que isso."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Roteiro Completo</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>"A minha mãe foi diagnosticada com câncer de mama. E essa batalha que ela travou, eu a perdi duas vezes."</p>
+              <p>"Eu vi o que a doença faz com o corpo de uma mulher. E eu vi o que uma boa cirurgia reconstrutora pode fazer pela autoestima dela, pela forma como ela se olha, pela dignidade que ela reconquista."</p>
+              <p>"Foi ali que eu entendi que a cirurgia plástica vai muito além da estética. Ela reconstrói histórias. Devolve identidade. Transforma a relação que a pessoa tem com o próprio corpo depois de passar por algo devastador."</p>
+              <p>"E na residência, isso se confirmou. Acompanhei cirurgias reparadoras em crianças com queimaduras graves. Vi pequenos saírem do centro cirúrgico com uma expressão diferente, como se a cirurgia tivesse devolvido não só a pele, mas a possibilidade de existir no mundo sem vergonha."</p>
+              <div class="script-quote">"Trinta anos depois, é isso que ainda me faz entrar na sala de cirurgia com o mesmo entusiasmo."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Engajamento</div>
+              <p>"Você já pensou no que te move profissionalmente? Me conta nos comentários. E me segue para conhecer mais do meu trabalho."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- CARD 05 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">05</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag inst">🏥 Institucional</span>
+              <span class="tag viral">🔥 Engajamento</span>
+            </div>
+            <h3>Tour pela clínica — Estrutura premium</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels dinâmico</strong></div>
+        <div class="meta-item">⏱ <strong>45 a 60s</strong></div>
+        <div class="meta-item">🎥 <strong>Câmera em movimento pela ASC</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-label">Câmera entra na recepção</div>
+            <div class="hook-block">"Deixa eu te mostrar onde acontece a transformação."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Percurso pela clínica</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-num" style="background:var(--teal-dim);border-color:rgba(34,211,238,0.2);color:var(--teal)">🚪</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Recepção</div>
+                  <div class="pillar-desc">"A experiência começa aqui. Pensamos em cada detalhe para que você se sinta segura desde a chegada."</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num" style="background:var(--teal-dim);border-color:rgba(34,211,238,0.2);color:var(--teal)">💬</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Sala de Consulta</div>
+                  <div class="pillar-desc">"Aqui é onde tudo começa de verdade: a escuta. Nenhuma cirurgia acontece antes de uma conversa honesta."</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num" style="background:var(--teal-dim);border-color:rgba(34,211,238,0.2);color:var(--teal)">🔬</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Centro Cirúrgico</div>
+                  <div class="pillar-desc">"Equipamentos de padrão hospitalar dentro de um ambiente clínico certificado."</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num" style="background:var(--teal-dim);border-color:rgba(34,211,238,0.2);color:var(--teal)">❤️</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Área de Recuperação</div>
+                  <div class="pillar-desc">"E o pós-operatório também faz parte do nosso cuidado."</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"A ASC Plástica foi pensada para entregar não só resultado, mas uma experiência completa. Link na bio para agendar sua visita."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CARD 06 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">06</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag pessoal">💛 Pessoal</span>
+              <span class="tag viral">🔥 Engajamento</span>
+            </div>
+            <h3>O Alfonso fora do consultório</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels leve</strong></div>
+        <div class="meta-item">⏱ <strong>45 a 60s</strong></div>
+        <div class="meta-item">🎥 <strong>Bastidores reais</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-label">Sem jaleco, tom bem-humorado</div>
+            <div class="hook-block">"Muita gente me conhece como cirurgião. Mas tem uma parte minha que a maioria nunca viu."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Cortes rápidos — Momentos reais</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>☕ <strong>Café e leitura</strong> — "Meu dia começa com silêncio e um café forte. É o meu ritual."</p>
+              <p>🏃 <strong>Atividade física ou hobby</strong> — "Movimento faz parte da minha rotina. Não consigo pensar bem sem isso."</p>
+              <p>❤️ <strong>Família e natureza</strong> — "E tem os momentos que me lembram por que trabalho tanto: as pessoas que eu amo."</p>
+              <div class="script-quote">"Médico é o que eu faço. Mas não é tudo que eu sou."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Engajamento</div>
+              <p>"Me conta: você prefere me ver mais aqui nos bastidores ou com conteúdo técnico? Comenta aí embaixo. Você me ajuda a criar o que é útil pra você."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CARD 07 FULL -->
+  <div class="cards-grid single">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">07</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag edu">🧠 Educativo</span>
+              <span class="tag inst">🏥 Autoridade</span>
+            </div>
+            <h3>O que levo em conta para um resultado seguro e duradouro</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Reels educativo</strong></div>
+        <div class="meta-item">⏱ <strong>70 a 85s</strong></div>
+        <div class="meta-item">🎥 <strong>Consultório, jaleco</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-block">"Resultado bonito qualquer um promete. Resultado seguro e duradouro — essa é outra conversa."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Os 3 Pilares</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-num">1</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Indicação correta</div>
+                  <div class="pillar-desc">Não existe procedimento certo para todo mundo. Existe o procedimento certo para você — seu corpo, sua saúde, seu momento de vida.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">2</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Técnica com propósito</div>
+                  <div class="pillar-desc">Não opero para impressionar. Opero para que o resultado dure e envelheça bem. Naturalidade não é acidente. É planejamento.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">3</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Acompanhamento real</div>
+                  <div class="pillar-desc">Minha responsabilidade não termina na sala de cirurgia. O pós-operatório é parte do protocolo, e levo isso com toda a seriedade.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"Se você está pesquisando sobre cirurgia plástica, comece pela pessoa certa. Agende sua avaliação. Link na bio."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SUGESTÕES -->
+  <div class="section-heading" style="margin-top:48px">
+    <h2>💡 Sugestões Adicionais</h2>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- CARD 08 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">08</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag story">📖 Estudo de Caso</span>
+              <span class="tag sug">✨ Sugestão</span>
+            </div>
+            <h3>Lifting Facial — "Ela queria envelhecer bem, não parecer jovem demais"</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Storytelling</strong></div>
+        <div class="meta-item">⏱ <strong>75 a 90s</strong></div>
+        <div class="meta-item">🎥 <strong>Tom pessoal com imagens do caso</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook Sugerido</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-block">"Ela me disse uma coisa que eu nunca esqueço: Doutor, eu não quero parecer jovem. Eu quero parecer eu mesma."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Conceito e Roteiro</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>Paciente de 63 anos, executiva, que sentia que o rosto havia perdido o contorno firme que ela sempre teve. Não queria resultado exagerado. Queria naturalidade e harmonia com a própria história.</p>
+              <p>Realizou lifting facial com abordagem do SMAS e lipoenxertia facial para reposição de volume nas regiões temporais e malar, técnica que evita o aspecto "esticado" e devolve uma aparência rejuvenescida e genuína.</p>
+              <p>Três ângulos para explorar no vídeo: o planejamento cirúrgico individualizado, o respeito à identidade da paciente e a diferença entre rejuvenescer e transformar.</p>
+              <div class="script-quote">"Ela voltou seis meses depois com uma frase: as pessoas falam que estou bem, mas ninguém sabe o que eu fiz. E era exatamente isso que ela queria."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎨</span>
+              <span class="acc-label">Dica de Produção</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="prod-block">
+              <div class="prod-label">Sugestão Visual</div>
+              <p>Mostrar antes e depois em split screen com zoom suave no rosto. Texto na tela: "6 meses depois". Narração com música instrumental ao fundo. Esse formato tende a ter alto tempo de retenção em contas médicas.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CARD 09 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">09</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag edu">🧠 Educativo</span>
+              <span class="tag sug">✨ Sugestão</span>
+            </div>
+            <h3>O que ninguém te conta sobre o pós-operatório</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Desmistificação</strong></div>
+        <div class="meta-item">⏱ <strong>60 a 75s</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook Sugerido</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-block">"O resultado final da sua cirurgia não aparece na primeira semana. E tudo bem."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Temas a Abordar</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-num">1</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Edema normal × sinal de atenção</div>
+                  <div class="pillar-desc">Inchaço é esperado e faz parte do processo. O que diferencia o edema normal de algo preocupante, e quando acionar o médico.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">2</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Tempo real de resultado</div>
+                  <div class="pillar-desc">Por que o resultado definitivo leva meses para aparecer e qual é a linha do tempo real de cada procedimento.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">3</div>
+                <div class="pillar-content">
+                  <div class="pillar-title">Paciência como parte do protocolo</div>
+                  <div class="pillar-desc">Quem trata o pós-op como mera burocracia compromete o resultado. A recuperação é parte inseparável da cirurgia.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">Tom Recomendado</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Postura</div>
+              <p>Honesto e tranquilizador. Quebra o medo sem minimizar a seriedade da recuperação. Tom de médico que acompanha, não de médico que alerta.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CARD 10 -->
+  <div class="cards-grid single" style="margin-top:12px">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-num-title">
+          <div class="card-num">10</div>
+          <div class="card-title-area">
+            <div class="card-tags">
+              <span class="tag viral">🔥 FAQ</span>
+              <span class="tag sug">✨ Sugestão</span>
+              <span class="tag edu">🧠 Educativo</span>
+            </div>
+            <h3>Cirurgia plástica tem idade certa?</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-item">📱 <strong>Pergunta do público</strong></div>
+        <div class="meta-item">⏱ <strong>50 a 65s</strong></div>
+        <div class="meta-item">🎥 <strong>Tom direto e humano</strong></div>
+      </div>
+      <div class="accordion">
+
+        <div class="acc-item open">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">⚡</span>
+              <span class="acc-label">Hook Sugerido</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="hook-block">"Doutor, será que não sou jovem demais, ou velha demais, pra fazer isso? Essa é uma das perguntas que mais recebo."</div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">🎬</span>
+              <span class="acc-label">Conceito</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="script-block">
+              <p>Responder de forma direta e humana: <strong>não existe idade certa, existe momento certo</strong>. O momento ideal é aquele em que a pessoa tem saúde, maturidade emocional e motivação genuína.</p>
+              <p>Mencionar casos em faixas etárias diferentes: jovens com indicação legítima para procedimentos específicos, e pacientes com 50, 60 anos que se cuidam e têm resultados extraordinários.</p>
+              <div class="script-quote">"Cirurgia plástica não é sobre parecer mais jovem. É sobre se sentir bem na própria pele, em qualquer fase da vida."</div>
+              <p>Quebrar o tabu de que cirurgia plástica é exclusividade de uma faixa etária. Esse formato de FAQ tem altíssimo potencial de compartilhamento por identificação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggle(this)">
+            <div class="acc-trigger-left">
+              <span class="acc-icon">📣</span>
+              <span class="acc-label">CTA Final</span>
+            </div>
+            <div class="acc-arrow">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="cta-block">
+              <div class="cta-label">Fechamento</div>
+              <p>"A avaliação começa por uma conversa. Me manda uma mensagem ou acessa o link na bio para agendar a sua."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DICA DE PRODUÇÃO -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-top:32px;display:flex;gap:20px;align-items:flex-start;">
+    <div style="font-size:28px;line-height:1">💡</div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px">Dica de Produção — Todos os Vídeos</div>
+      <p style="font-size:13.5px;line-height:1.75;color:var(--text);font-weight:300">Priorize <strong style="color:var(--text-bright)">iluminação natural</strong> ou luz de estúdio limpa, cortes no ritmo da fala e <strong style="color:var(--text-bright)">legendas sempre ativas</strong>, pois mais de 70% dos Reels são assistidos sem som. O Dr. Alfonso olhando diretamente para a câmera nos hooks aumenta significativamente a retenção nos primeiros 3 segundos. Para vídeos de storytelling, considere música instrumental suave ao fundo em volume baixo. Nos vídeos pessoais, imagens verticais em movimento com estabilização transmitem mais autenticidade do que planos fixos.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left"><strong>ASC Plástica</strong> · Dr. Alfonso Sempertegui · Belo Horizonte</div>
+  <div class="footer-right">10 roteiros para Instagram · Reels e vídeos institucionais · SBCP-MG</div>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.acc-item');
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
