@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros — Dr. Alfonso Sempertegui</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --bg2: #EEEAE2;
+    --ink: #1A1714;
+    --ink2: #5C5650;
+    --ink3: #9C958D;
+    --gold: #B8934A;
+    --gold-light: #F0E4CC;
+    --teal: #2A6B5C;
+    --teal-light: #D6EDE8;
+    --plum: #4A2C5C;
+    --plum-light: #E8D6F0;
+    --coral: #C4522A;
+    --coral-light: #F5E0D6;
+    --line: #D8D2C8;
+    --r: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--bg2); color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p {
+    font-size: 15px;
+    color: var(--ink2);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 3rem auto;
+    opacity: 0.5;
+  }
+
+  /* GRID DE CARDS */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+    cursor: pointer;
+  }
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .card.open { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+  .card-top {
+    padding: 20px 20px 16px;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .badge-case { background: var(--teal-light); color: var(--teal); }
+  .badge-pessoal { background: var(--plum-light); color: var(--plum); }
+  .badge-bate { background: var(--gold-light); color: #7A5E28; }
+  .badge-rank { background: var(--coral-light); color: var(--coral); }
+  .card-num {
+    font-size: 11px;
+    color: var(--ink3);
+    font-weight: 500;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--ink3);
+  }
+  .card-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink3);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .toggle-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink3);
+    transition: transform 0.25s, background 0.2s;
+    flex-shrink: 0;
+  }
+  .card.open .toggle-icon { transform: rotate(45deg); background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ROTEIRO EXPANDIDO */
+  .roteiro {
+    display: none;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .card.open .roteiro { display: block; }
+
+  .gancho-box {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--gold-light);
+  }
+  .gancho-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7A5E28;
+    margin-bottom: 6px;
+  }
+  .gancho-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #5A4010;
+    line-height: 1.6;
+  }
+
+  .blocos { padding: 12px 20px 16px; }
+  .bloco {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .bloco:last-child { border-bottom: none; }
+  .bloco-time {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink3);
+    letter-spacing: 0.04em;
+    padding-top: 1px;
+  }
+  .bloco-content {}
+  .bloco-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .bloco-text {
+    font-size: 12px;
+    color: var(--ink2);
+    line-height: 1.6;
+  }
+
+  /* FALAS */
+  .fala {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .speaker {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .sp-dr { background: var(--teal-light); color: var(--teal); }
+  .sp-vd { background: var(--plum-light); color: var(--plum); }
+  .sp-dir { background: var(--bg2); color: var(--ink3); font-style: italic; }
+  .fala-text { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+
+  /* RANK ITEMS */
+  .rank-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rank-item:last-child { border-bottom: none; }
+  .rank-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--line);
+    min-width: 24px;
+    text-align: right;
+    line-height: 1.2;
+  }
+  .rank-n.g { color: var(--gold); }
+  .rank-n.s { color: var(--ink3); }
+  .rank-n.b { color: var(--coral); }
+  .rank-info {}
+  .rank-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .rank-note { font-size: 11px; color: var(--ink2); line-height: 1.5; margin-bottom: 4px; }
+  .rank-tag {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  .rt-sim { background: var(--teal-light); color: var(--teal); }
+  .rt-dep { background: var(--gold-light); color: #7A5E28; }
+  .rt-nao { background: var(--coral-light); color: var(--coral); }
+
+  .tip-box {
+    background: var(--bg2);
+    border-left: 2px solid var(--gold);
+    padding: 8px 12px;
+    margin-top: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink3);
+    letter-spacing: 0.06em;
+  }
+  footer span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card { animation: fadeUp 0.4s ease both; }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+  .card:nth-child(8) { animation-delay: 0.4s; }
+  .card:nth-child(9) { animation-delay: 0.45s; }
+  .card:nth-child(10) { animation-delay: 0.5s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .section { padding: 0 1.5rem 3rem; }
+    nav { padding: 0 1.5rem; }
+    .bloco { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dr. Alfonso <span>Sempertegui</span></div>
+  <ul class="nav-links">
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#marca">Marca pessoal</a></li>
+    <li><a href="#interativos">Interativos</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Guia de produção de conteúdo</p>
+  <h1>Roteiros de <em>vídeo</em><br>para redes sociais</h1>
+  <p>10 roteiros estruturados para construir autoridade, gerar confiança e transformar seguidores em pacientes.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label">Roteiros</span></div>
+    <div class="stat"><span class="stat-num">30</span><span class="stat-label">Anos de mercado</span></div>
+    <div class="stat"><span class="stat-num">~2min</span><span class="stat-label">Por vídeo</span></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CASES CIRÚRGICOS -->
+<div class="section" id="cases">
+  <p class="section-label">Cases antes e depois — cirurgias</p>
+  <div class="cards-grid" id="grid-cases"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MARCA PESSOAL -->
+<div class="section" id="marca">
+  <p class="section-label">Marca pessoal & posicionamento</p>
+  <div class="cards-grid" id="grid-marca"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- INTERATIVOS -->
+<div class="section" id="interativos">
+  <p class="section-label">Vídeos interativos & conversação</p>
+  <div class="cards-grid" id="grid-interativos"></div>
+</div>
+
+<footer>
+  Produzido para <span>Dr. Alfonso Sempertegui</span> · Cirurgia Plástica · 30 anos de mercado
+</footer>
+
+<script>
+const videos = {
+  cases: [
+    {
+      num: "01",
+      title: "Case — Mama",
+      sub: "Aumento / redução / lifting",
+      badge: "Case cirurgia", badgeClass: "badge-case",
+      gancho: "'Isso foi possível depois de 30 anos cuidando de quem confia em mim.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Mostre o resultado final. Narração sobre o resultado sem revelar o antes ainda." },
+        { time: "10–40s", title: "Apresentação do caso", text: "Contexto da paciente (sem identificar): idade, queixa principal, o que a incomodava, há quanto tempo buscava solução." },
+        { time: "40–70s", title: "Diagnóstico e decisão", text: "Dr. Alfonso explica em câmera: qual técnica foi escolhida, por quê, o que foi levado em conta (anatomia, expectativa, segurança)." },
+        { time: "70–100s", title: "Revelação antes e depois", text: "Comparativo visual lado a lado. Narração suave do médico sobre o resultado." },
+        { time: "100–120s", title: "Depoimento", text: "Frase curta de impacto em texto na tela ou voz, com consentimento da paciente." },
+        { time: "120–130s", title: "CTA", text: "'Se você tem essa dúvida, vem conversar comigo. Link na bio para agendar sua consulta.'" }
+      ]
+    },
+    {
+      num: "02",
+      title: "Case — Blefaroplastia",
+      sub: "Cirurgia de pálpebras",
+      badge: "Case cirurgia", badgeClass: "badge-case",
+      gancho: "'Você já olhou no espelho e sentiu que seu olhar não reflete o quanto você se sente por dentro?'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Close nos olhos da paciente — resultado pós-operatório. Pergunta em narração." },
+        { time: "10–35s", title: "Educação rápida", text: "O que é blefaroplastia, quem indica, sinais de que pode ser indicada: pálpebra caída, excesso de pele, olhar cansado." },
+        { time: "35–65s", title: "O caso", text: "Perfil da paciente, queixa, exame clínico, técnica escolhida pelo Dr. Alfonso." },
+        { time: "65–90s", title: "Antes e depois", text: "Comparativo visual. Destaque para naturalidade e harmonia do resultado." },
+        { time: "90–110s", title: "Desmistificação", text: "Dr. Alfonso responde: 'Vou ficar com cara de operado?' — explicando a abordagem natural." },
+        { time: "110–120s", title: "CTA", text: "'Agende sua avaliação. Cuido do seu olhar com 30 anos de experiência.'" }
+      ]
+    },
+    {
+      num: "03",
+      title: "Case — Lipoaspiração",
+      sub: "Contorno corporal",
+      badge: "Case cirurgia", badgeClass: "badge-case",
+      gancho: "'Dieta, academia, esforço — e o contorno simplesmente não mudava. Até essa cirurgia.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Antes e depois em corte rápido — região tratada. Frase de impacto em narração." },
+        { time: "10–40s", title: "Contexto do caso", text: "Perfil da paciente, regiões tratadas, expectativa inicial x real. Humanização: o que ela sentia antes." },
+        { time: "40–70s", title: "Técnica e segurança", text: "Dr. Alfonso fala sobre a técnica utilizada, cuidados no planejamento, como a recuperação foi conduzida." },
+        { time: "70–95s", title: "Resultado", text: "Vídeo/fotos do antes e depois. Narração destacando naturalidade e proporção." },
+        { time: "95–110s", title: "O que ninguém fala", text: "'Lipo não é emagrecimento. É contorno. E isso muda tudo.' — frase direta do médico." },
+        { time: "110–120s", title: "CTA", text: "'Quer entender se essa cirurgia é para você? Me manda mensagem.'" }
+      ]
+    },
+    {
+      num: "04",
+      title: "Case — Facial",
+      sub: "Ritidoplastia / rejuvenescimento",
+      badge: "Case cirurgia", badgeClass: "badge-case",
+      gancho: "'Ela não queria parecer jovem. Ela queria se reconhecer no espelho.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Frase do médico em câmera ou narração. Resultado facial em close — expressão natural." },
+        { time: "10–35s", title: "Filosofia do Dr. Alfonso", text: "'Cirurgia facial boa é a que ninguém percebe que foi feita.' Contexto dos 30 anos de prática." },
+        { time: "35–65s", title: "O caso", text: "Perfil da paciente, queixas, técnica utilizada, o que foi feito e por quê." },
+        { time: "65–90s", title: "Antes e depois", text: "Comparativo com ênfase em naturalidade. Mostrar sutileza do resultado — evitar exagero." },
+        { time: "90–110s", title: "Depoimento em texto", text: "'Finalmente me vejo de novo.' — frase da paciente na tela com consentimento." },
+        { time: "110–120s", title: "CTA", text: "'Você pode se reconhecer de novo. Vens conversar comigo.'" }
+      ]
+    },
+    {
+      num: "05",
+      title: "Case — Curinga",
+      sub: "Rinoplastia ou 2º caso corporal",
+      badge: "Case cirurgia", badgeClass: "badge-case",
+      gancho: "'Esse foi um dos casos que mais me marcou — e o resultado fala por si mesmo.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Frase do médico com resultado em tela. Clima de revelação." },
+        { time: "10–35s", title: "Perfil do caso", text: "Contexto, histórico, queixa principal. Humanização da pessoa por trás da cirurgia." },
+        { time: "35–65s", title: "Planejamento cirúrgico", text: "Dr. Alfonso explica o raciocínio clínico: o que avaliou, o que escolheu, por quê esse caminho." },
+        { time: "65–90s", title: "Antes e depois", text: "Comparativo visual. Narração que valoriza a transformação sem exagero." },
+        { time: "90–110s", title: "Reflexão do médico", text: "'Quando vejo esse resultado, lembro por que escolhi essa profissão.' — tom genuíno e humano." },
+        { time: "110–120s", title: "CTA", text: "'Se você tem um caso parecido ou só uma dúvida, me chama. Estou aqui.'" }
+      ]
+    }
+  ],
+  marca: [
+    {
+      num: "06",
+      title: "Quem é o Dr. Alfonso",
+      sub: "Apresentação e posicionamento",
+      badge: "Pessoal / marca", badgeClass: "badge-pessoal",
+      gancho: "'30 anos de cirurgia plástica me ensinaram uma coisa: o paciente não quer só um resultado. Ele quer confiar.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Dr. Alfonso em ambiente neutro ou consultório. Fala direta pra câmera, tom reflexivo." },
+        { time: "10–40s", title: "Trajetória resumida", text: "De onde veio, como chegou na cirurgia plástica, o que o move até hoje. Sem currículo — contar como história." },
+        { time: "40–70s", title: "Filosofia de trabalho", text: "'Minha cirurgia começa muito antes da sala de operação.' — falar sobre consulta, escuta, planejamento individualizado." },
+        { time: "70–95s", title: "O que faz diferente", text: "Especialidades, perfil de pacientes, abordagem estética: naturalidade acima de tudo." },
+        { time: "95–110s", title: "Momento humano", text: "Uma história curta que marcou a carreira — sem identificar paciente. Tom pessoal e genuíno." },
+        { time: "110–120s", title: "CTA", text: "'Estou aqui. Quando você estiver pronto para conversar, pode me chamar.'" }
+      ]
+    },
+    {
+      num: "07",
+      title: "O que é e não é cirurgia plástica",
+      sub: "Desmistificação + autoridade ética",
+      badge: "Pessoal / marca", badgeClass: "badge-pessoal",
+      gancho: "'A maioria das pessoas chega na consulta com uma ideia errada do que a cirurgia plástica pode fazer. Vou corrigir isso agora.'",
+      blocos: [
+        { time: "0–10s", title: "Gancho", text: "Afirmação provocativa em câmera. Tom direto e seguro." },
+        { time: "10–40s", title: "O que não é", text: "'Não é mágica. Não substitui hábitos. Não é só vaidade.' — lista rápida com explicação breve de cada mito." },
+        { time: "40–70s", title: "O que é", text: "'É saúde. É autoestima. É cirurgia de verdade, com riscos reais e resultados reais.' — posicionamento claro." },
+        { time: "70–95s", title: "Papel do médico", text: "Como o Dr. Alfonso conduz a consulta para alinhar expectativa — o que pergunta, avalia, quando indica ou não indica." },
+        { time: "95–110s", title: "Quando ele recusa", text: "Mostrar que recusa cirurgia quando necessário — gera confiança e diferenciação ética." },
+        { time: "110–120s", title: "CTA", text: "'Quer entender o que é indicado para você? Comece por uma consulta honesta.'" }
+      ]
+    }
+  ],
+  interativos: [
+    {
+      num: "08",
+      title: "Bate-bola a dois",
+      sub: "Perguntas da videomaker · formato conversa",
+      badge: "Conversa", badgeClass: "badge-bate",
+      gancho: "'Tenho uma lista de perguntas que os seguidores mandam toda semana. O senhor topa responder com total honestidade?'",
+      tipo: "bate",
+      blocos: [
+        {
+          time: "0–10s", title: "Abertura",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Dr. Alfonso, tenho uma lista de perguntas que os seguidores mandam toda semana. O senhor topa responder com total honestidade?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Trinta anos de cirurgia me ensinaram a não ter medo de perguntas difíceis. Pode vir.'" },
+            { speaker: "Direção", cls: "sp-dir", text: "Ambiente descontraído, sem jaleco obrigatório, luz natural. Corte rápido após a resposta." }
+          ]
+        },
+        {
+          time: "10–30s", title: "A cirurgia que faria em si mesmo",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Se o senhor tivesse que escolher uma cirurgia pra fazer em si mesmo, qual seria?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Blefaroplastia. Sem dúvida. O olhar é o que mais entrega a idade — e é a cirurgia com menor risco e maior retorno em naturalidade.'" },
+            { speaker: "Direção", cls: "sp-dir", text: "Capturar a reação da videomaker — expressão de surpresa funciona bem aqui." }
+          ]
+        },
+        {
+          time: "30–55s", title: "A cirurgia que nunca faria",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'E tem alguma que o senhor nunca faria — nem em si mesmo, nem indicaria pra alguém próximo?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Qualquer procedimento feito por pressão externa. Quando o paciente quer mudar por outra pessoa, o resultado nunca satisfaz. Isso eu não opero.'" }
+          ]
+        },
+        {
+          time: "55–75s", title: "O caso mais difícil da carreira",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Sem precisar identificar ninguém — qual foi o caso que mais pesou emocionalmente na sua carreira?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Resposta livre e genuína. Preparar com antecedência — ~15 segundos, tom pausado." },
+            { speaker: "Direção", cls: "sp-dir", text: "Não cortar essa fala. Deixar o silêncio natural no final antes do próximo corte." }
+          ]
+        },
+        {
+          time: "75–95s", title: "O que mudou em 30 anos",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'O que mudou mais na cirurgia plástica desde que o senhor começou — a técnica ou o paciente?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Os dois mudaram. Mas o paciente hoje chega muito mais influenciado por redes sociais. Meu papel mudou: além de operar, preciso resgatar a pessoa de uma expectativa irreal.'" }
+          ]
+        },
+        {
+          time: "95–115s", title: "A pergunta que ninguém faz",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Última — qual a pergunta que os pacientes deveriam fazer na consulta e quase ninguém faz?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'O senhor me operaria se eu fosse familiar seu? Quando a resposta é sim, você está no lugar certo.'" },
+            { speaker: "Direção", cls: "sp-dir", text: "Essa frase é o encerramento natural. Não precisa de muito depois — deixar respirar." }
+          ]
+        },
+        {
+          time: "115–125s", title: "CTA",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Manda mais perguntas nos comentários — a gente faz mais episódios assim.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'E quem quiser uma consulta de verdade, é só me chamar.'" }
+          ]
+        }
+      ]
+    },
+    {
+      num: "09",
+      title: "As cirurgias que eu faria — e não faria",
+      sub: "Opinião do médico · formato ranking",
+      badge: "Opinião", badgeClass: "badge-bate",
+      gancho: "'Depois de 30 anos operando, tenho opinião formada sobre cada procedimento. Vou ser honesto com vocês.'",
+      tipo: "bate",
+      blocos: [
+        {
+          time: "0–10s", title: "Abertura",
+          falas: [
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Depois de 30 anos operando, tenho opinião formada sobre cada procedimento. Vou ser honesto com vocês.'" },
+            { speaker: "Direção", cls: "sp-dir", text: "Tom reflexivo, sem jaleco. Câmera próxima — clima de confidência." }
+          ]
+        },
+        {
+          time: "10–25s", title: "Posicionamento",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'O senhor vai falar como médico ou como pessoa?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'Como os dois. Porque é impossível separar depois de tanto tempo.'" }
+          ]
+        },
+        {
+          time: "25–90s", title: "Ranking comentado",
+          falas: [
+            { speaker: "Direção", cls: "sp-dir", text: "Videomaker revela um card por vez com o nome do procedimento. Dr. Alfonso comenta cada um em ~10 segundos." },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Blefaroplastia → 'Faria em mim. Menor risco, maior retorno, resultado natural.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Rinoplastia → 'Depende muito da expectativa. Uma das mais delicadas psicologicamente.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Lipoaspiração → 'Excelente quando bem indicada. Péssima quando usada como substituto de hábitos.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Lifting facial → 'O mais transformador. E o que mais exige técnica e maturidade do cirurgião.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Cirurgia por pressão externa → 'Essa eu recuso. Independente do procedimento.'" }
+          ]
+        },
+        {
+          time: "90–110s", title: "A virada",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Qual dessas o senhor mais se arrepende de ter feito em algum paciente?'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "Resposta livre e genuína. Momento de máxima humanização do vídeo." },
+            { speaker: "Direção", cls: "sp-dir", text: "Não sugerir resposta — deve ser espontânea. Essa é a fala que vira clip viral." }
+          ]
+        },
+        {
+          time: "110–125s", title: "CTA",
+          falas: [
+            { speaker: "Videomaker", cls: "sp-vd", text: "'Concorda? Discorda? Me conta nos comentários.'" },
+            { speaker: "Dr. Alfonso", cls: "sp-dr", text: "'E se quiser saber o que eu indicaria pra você especificamente — é só me chamar pra uma consulta.'" }
+          ]
+        }
+      ]
+    },
+    {
+      num: "10",
+      title: "Ranking de estéticos — Vale a pena?",
+      sub: "Procedimentos não cirúrgicos · formato interativo",
+      badge: "Ranking", badgeClass: "badge-rank",
+      gancho: "'Vou mostrar uma lista de procedimentos estéticos — do mais básico ao mais complexo. O senhor vai me dizer: vale a pena, depende, ou joga fora?'",
+      tipo: "ranking",
+      ranks: [
+        { n: "1", cls: "g", name: "Protetor solar diário", note: "'Se eu pudesse prescrever uma coisa para todo mundo, era essa. Nenhuma cirurgia corrige o que o sol faz ao longo de 20 anos.'", tag: "Vale muito", tagCls: "rt-sim" },
+        { n: "2", cls: "g", name: "Limpeza de pele profissional", note: "'Depende da pele. Para quem tem tendência a acne, é essencial. Para pele seca e madura, nem tanto.'", tag: "Depende do perfil", tagCls: "rt-dep" },
+        { n: "3", cls: "s", name: "Botox preventivo", note: "'Bem indicado e bem aplicado, é aliado. O problema é o excesso — quando a pessoa perde expressão. Aí virou problema, não solução.'", tag: "Vale com critério", tagCls: "rt-dep" },
+        { n: "4", cls: "s", name: "Preenchimento labial", note: "'Um dos mais pedidos e um dos mais mal feitos. Quando é natural, ninguém percebe. Quando é exagerado, todo mundo percebe — inclusive a pessoa.'", tag: "Depende do executor", tagCls: "rt-dep" },
+        { n: "5", cls: "b", name: "Peeling e laser facial", note: "'Ótimos resultados para manchas e textura. Mas precisam de preparo de pele antes e cuidado depois. Não é faz e esquece.'", tag: "Vale com preparo", tagCls: "rt-sim" },
+        { n: "6", cls: "b", name: "Bioestimuladores de colágeno", note: "'Para quem está na faixa dos 40 em diante, é uma das melhores opções não cirúrgicas. Resultado progressivo, natural. Mas precisa de paciência.'", tag: "Subestimado — vale", tagCls: "rt-sim" },
+        { n: "7", cls: "", name: "Cremes 'lifting' em casa", note: "Videomaker: 'E esses cremes de R$500 que prometem lifting?' — Dr. Alfonso ri: 'Hidratam bem. Lifting, nenhum.'", tag: "Expectativa errada", tagCls: "rt-nao" }
+      ],
+      blocos: [
+        { time: "0–12s", title: "Gancho", text: "Videomaker segura uma lista de papel. Tom de desafio. Dr. Alfonso aceita com confiança." },
+        { time: "12–100s", title: "O ranking", text: "Videomaker revela um card por vez. Dr. Alfonso dá veredicto + explicação rápida (~10s cada)." },
+        { time: "100–115s", title: "Virada", text: "Videomaker: 'Qual desses o senhor acha mais subestimado?' — Dr. Alfonso: 'Protetor solar. As pessoas gastam fortunas em procedimento e não usam protetor todo dia.'" },
+        { time: "115–125s", title: "CTA", text: "Videomaker: 'Concorda com o ranking?' — Dr. Alfonso: 'E quem quiser saber o que funciona pra seu caso, me chama pra uma consulta.'" }
+      ]
+    }
+  ]
+};
+
+function renderBlocos(blocos) {
+  return blocos.map(b => {
+    if (b.falas) {
+      return `<div class="bloco">
+        <div class="bloco-time">${b.time}</div>
+        <div class="bloco-content">
+          <div class="bloco-title">${b.title}</div>
+          ${b.falas.map(f => `
+            <div class="fala">
+              <div class="speaker ${f.cls}">${f.speaker}</div>
+              <div class="fala-text">${f.text}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+    return `<div class="bloco">
+      <div class="bloco-time">${b.time}</div>
+      <div class="bloco-content">
+        <div class="bloco-title">${b.title}</div>
+        <div class="bloco-text">${b.text}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderCard(v) {
+  const rankHTML = v.tipo === 'ranking' && v.ranks ? `
+    <div style="padding: 12px 20px 0;">
+      <div class="gancho-label" style="color:var(--ink3);">Ranking dos procedimentos</div>
+      ${v.ranks.map(r => `
+        <div class="rank-item">
+          <div class="rank-n ${r.cls}">${r.n}</div>
+          <div class="rank-info">
+            <div class="rank-name">${r.name}</div>
+            <div class="rank-note">${r.note}</div>
+            <span class="rank-tag ${r.tagCls}">${r.tag}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  return `
+    <div class="card" onclick="toggle(this)">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="badge ${v.badgeClass}">${v.badge}</span>
+          <span class="card-num">Vídeo ${v.num}</span>
+        </div>
+        <h3>${v.title}</h3>
+        <div class="card-sub">${v.sub}</div>
+      </div>
+      <div class="card-toggle">
+        <span>Ver roteiro completo</span>
+        <div class="toggle-icon">+</div>
+      </div>
+      <div class="roteiro">
+        <div class="gancho-box">
+          <div class="gancho-label">Gancho de abertura</div>
+          <div class="gancho-text">${v.gancho}</div>
+        </div>
+        ${rankHTML}
+        <div class="blocos">${renderBlocos(v.blocos)}</div>
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('grid-cases').innerHTML = videos.cases.map(renderCard).join('');
+document.getElementById('grid-marca').innerHTML = videos.marca.map(renderCard).join('');
+document.getElementById('grid-interativos').innerHTML = videos.interativos.map(renderCard).join('');
+
+function toggle(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
