@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros Avançados – Dr. Yeiko</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #e8eaf0;
+    --muted: #7c86a0;
+    --border: #252a3a;
+    --danger: #ef4444;
+    --success: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, #0d0f14, #0f172a, #0d0f14);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 24px 28px; text-align: center; position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 200px;
+    background: radial-gradient(ellipse, rgba(59,130,246,0.15) 0%, transparent 70%);
+  }
+  .header-tag {
+    display: inline-block; background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3);
+    color: var(--accent2); font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-family: 'Syne', sans-serif; font-size: clamp(22px, 5vw, 40px); font-weight: 800; color: #fff; letter-spacing: -1px; }
+  .header h1 span { color: var(--accent); }
+  .header-meta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .meta-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 14px; font-size: 12px; color: var(--muted); }
+  .meta-chip strong { color: var(--text); }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 28px 18px 60px; }
+
+  .section-divider {
+    display: flex; align-items: center; gap: 12px; margin: 32px 0 20px;
+  }
+  .section-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .section-divider-label {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px; white-space: nowrap;
+  }
+
+  /* CARDS */
+  .script-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; transition: border-color 0.25s; }
+  .script-card:hover { border-color: rgba(59,130,246,0.35); }
+  .script-card.sugestao { border-style: dashed; }
+  .script-card.sugestao:hover { border-color: rgba(245,158,11,0.5); }
+
+  .card-header { display: flex; align-items: center; gap: 14px; padding: 18px 22px; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .card-header:hover { background: var(--surface2); }
+
+  .num-badge { min-width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+  .card-title-wrap { flex: 1; }
+  .card-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.3; }
+  .card-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+  .tag { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 7px; border-radius: 5px; }
+  .tag-viral { background: rgba(59,130,246,0.15); color: #93c5fd; }
+  .tag-edu { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .tag-qa { background: rgba(6,182,212,0.15); color: #67e8f9; }
+  .tag-humor { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .tag-novo { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+  .tag-trend { background: rgba(244,114,182,0.15); color: #f9a8d4; }
+  .tag-sug { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+
+  .toggle-btn { width: 26px; height: 26px; border-radius: 7px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s; flex-shrink: 0; }
+  .script-card.open .toggle-btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .card-body { display: none; padding: 4px 22px 22px; border-top: 1px solid var(--border); animation: fadeIn 0.2s ease; }
+  .script-card.open .card-body { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section { margin-top: 18px; }
+  .section-label { display: flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--border); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .hook-box { background: linear-gradient(135deg, rgba(59,130,246,0.09), rgba(6,182,212,0.06)); border: 1px solid rgba(59,130,246,0.22); border-left: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
+  .hook-text { font-size: 14px; font-style: italic; color: #c7d0e8; line-height: 1.65; }
+  .hook-text strong { font-style: normal; color: #e8eaf0; }
+
+  .script-text { font-size: 14px; color: #b8c0d8; line-height: 1.9; white-space: pre-line; }
+
+  /* QA format */
+  .qa-block { display: flex; flex-direction: column; gap: 10px; }
+  .qa-item { border-radius: 10px; padding: 12px 14px; }
+  .qa-pergunta { background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.15); }
+  .qa-resposta { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.15); }
+  .qa-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .qa-label.p { color: #93c5fd; }
+  .qa-label.r { color: #6ee7b7; }
+  .qa-text { font-size: 13.5px; color: #b8c0d8; line-height: 1.7; }
+
+  .cta-box { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.18); border-left: 3px solid var(--success); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #a7f3d0; line-height: 1.6; }
+  .tip-box { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.18); border-left: 3px solid var(--accent3); border-radius: 10px; padding: 12px 16px; font-size: 12.5px; color: #fde68a; line-height: 1.6; margin-top: 14px; }
+  .tip-box strong { display: block; margin-bottom: 3px; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent3); }
+  .alert-box { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.18); border-left: 3px solid var(--danger); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #fca5a5; line-height: 1.6; margin-top: 14px; }
+
+  .timer-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25); border-radius: 20px; padding: 3px 10px; font-size: 11px; color: #c4b5fd; font-weight: 600; margin-bottom: 4px; margin-top: 14px; }
+
+  /* themes */
+  .th1 .num-badge { background: rgba(6,182,212,0.15); color: #22d3ee; }
+  .th2 .num-badge { background: rgba(244,114,182,0.15); color: #f472b6; }
+  .th3 .num-badge { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .th4 .num-badge { background: rgba(16,185,129,0.15); color: #34d399; }
+  .th5 .num-badge { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .th6 .num-badge { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .th7 .num-badge { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .ths1 .num-badge { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .ths2 .num-badge { background: rgba(239,68,68,0.15); color: #f87171; }
+  .ths3 .num-badge { background: rgba(132,204,22,0.15); color: #a3e635; }
+
+  .footer { text-align: center; padding: 20px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">🎬 Roteiros Aprofundados</div>
+  <h1>Dr. <span>Yeiko</span> — Estética & Performance</h1>
+  <div class="header-meta">
+    <div class="meta-chip">📋 <strong>7 Roteiros</strong></div>
+    <div class="meta-chip">💡 <strong>+ 3 Sugestões</strong></div>
+    <div class="meta-chip">⏱️ <strong>Formato Reels</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ======================== ROTEIROS PRINCIPAIS ======================== -->
+
+  <!-- 01 MINILIPO -->
+  <div class="script-card th1" id="r1">
+    <div class="card-header" onclick="toggle('r1')">
+      <div class="num-badge">01</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Minilipo + Lipoenxertia — o que muda no seu corpo?</div>
+        <div class="card-tags"><span class="tag tag-edu">🧠 Educativo</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~55 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#22d3ee"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Câmera próxima, tom direto]</strong><br><br>
+          "Minilipo e lipoenxertia no mesmo procedimento. Tira de onde sobra e coloca onde falta. Mas tem detalhe que pouca gente te conta antes de decidir."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#22d3ee"></span> ROTEIRO</div>
+        <div class="script-text">A minilipo é uma lipoaspiração menos invasiva — feita com cânulas mais finas, anestesia local e recuperação mais rápida. Ideal para remover gordura localizada em áreas específicas como abdômen, flancos e papada.
+
+A lipoenxertia pega essa gordura retirada, processa e reinjeta em áreas que precisam de volume — glúteos, face, mãos.
+
+A combinação das duas é poderosa: você remodela o contorno sem implantar nada artificial. É gordura do próprio corpo.
+
+[Pausa]
+
+Mas aqui está o que precisa ser dito:
+
+O resultado depende diretamente da sua composição corporal no momento do procedimento. Quem chega com boa massa muscular e menos inflamação tem resultado mais preciso, recuperação mais rápida e menos perda do volume transferido.
+
+Por isso, preparo antes e cuidado depois fazem parte do procedimento — não são opcionais.
+
+Quer saber se você é candidato? Me chama no direct.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#22d3ee"></span> CTA</div>
+        <div class="cta-box">💬 "Você já considerou fazer minilipo? Me conta nos comentários."<br>📌 Salva esse vídeo se está pesquisando sobre o procedimento.</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Usar referência visual — desenhar no próprio corpo ou usar imagem ilustrativa de antes/depois (sem expor paciente). Texto na tela: "Tira de onde sobra. Coloca onde falta."
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 FALOPLASTIA -->
+  <div class="script-card th2" id="r2">
+    <div class="card-header" onclick="toggle('r2')">
+      <div class="num-badge">02</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Faloplastia com HA — o que é, como funciona e para quem é indicado</div>
+        <div class="card-tags"><span class="tag tag-edu">🧠 Educativo</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~50 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#f472b6"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Tom descontraído, sem julgamento — esse tema precisa de leveza]</strong><br><br>
+          "Esse é um dos assuntos que mais chegam no meu direct — e quase ninguém fala abertamente. Hoje eu falo."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#f472b6"></span> ROTEIRO</div>
+        <div class="script-text">A faloplastia com ácido hialurônico é um procedimento minimamente invasivo que tem como objetivo aumentar a espessura peniana — não o comprimento.
+
+É feito com o mesmo ácido hialurônico usado em preenchimentos faciais, por ser biocompatível, seguro e reversível.
+
+O procedimento é ambulatorial, com anestesia local, e a recuperação é rápida — geralmente alguns dias de repouso.
+
+[Tom clínico e respeitoso]
+
+Para quem é indicado?
+
+Para homens que têm insatisfação com a espessura e que passaram por avaliação médica adequada. Não é indicado para todo mundo — e a conversa honesta antes do procedimento é tão importante quanto o procedimento em si.
+
+O que eu sempre digo: autoestima e saúde caminham juntas. Quando o procedimento é bem indicado e bem executado, o impacto na qualidade de vida é real.
+
+Tem dúvida? Me manda mensagem — o direct é sigiloso.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#f472b6"></span> CTA</div>
+        <div class="cta-box">💬 "Me manda sua dúvida no direct — respondo todo mundo com sigilo total."<br>📌 Salva esse vídeo se quiser mais informações depois.</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Tom leve e sem eufemismos excessivos — isso passa confiança. Evitar linguagem clínica fria demais. Falar como médico que respeita e acolhe. Pode gravar em consultório para reforçar credibilidade.
+      </div>
+      <div class="alert-box">⚠️ Verificar diretrizes do CFM e plataformas sobre divulgação desse procedimento antes de publicar.</div>
+    </div>
+  </div>
+
+  <!-- 03 GLUTEO Q&A -->
+  <div class="script-card th3" id="r3">
+    <div class="card-header" onclick="toggle('r3')">
+      <div class="num-badge">03</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Preenchimento de Glúteo — Bate-bola de Perguntas</div>
+        <div class="card-tags"><span class="tag tag-qa">💬 Q&A</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~60 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#a78bfa"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Câmera, tom animado]</strong><br><br>
+          "Preenchimento de glúteo — respondi as perguntas que mais chegam aqui. Rápido e sem enrolação."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#a78bfa"></span> PERGUNTAS E RESPOSTAS</div>
+        <div class="qa-block">
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Dói muito?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Com anestesia local, o desconforto é mínimo durante o procedimento. A sensibilidade nos dias seguintes é leve e passa rápido.</div>
+          </div>
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Quanto tempo dura?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Depende do produto usado e do seu metabolismo. Em média, de 12 a 18 meses. Manutenção periódica mantém o resultado.</div>
+          </div>
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Posso sentar depois?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Sim — diferente do implante, o preenchimento não exige restrição de posição. Mas evitar pressão direta nas primeiras 48h é recomendado.</div>
+          </div>
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"É seguro?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Com médico habilitado e produto registrado, sim. O risco está em procedimentos feitos sem qualificação ou com produtos não aprovados. Escolha o profissional, não o preço.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#a78bfa"></span> CTA</div>
+        <div class="cta-box">💬 "Tem mais alguma dúvida? Joga aqui nos comentários — respondo todas."<br>📌 Salva pra não perder as respostas.</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Formato dinâmico: pergunta aparece na tela enquanto o médico faz gesto de "lendo" — depois responde olhando para a câmera. Cortes rápidos entre cada Q&A. Energia leve e direta.
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 EMAGRECI 30KG -->
+  <div class="script-card th4" id="r4">
+    <div class="card-header" onclick="toggle('r4')">
+      <div class="num-badge">04</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Emagreci 30kg — em quais procedimentos devo investir?</div>
+        <div class="card-tags"><span class="tag tag-qa">💬 Q&A</span><span class="tag tag-edu">🧠 Educativo</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~60 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#34d399"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Tom de quem vai revelar algo importante]</strong><br><br>
+          "Emagreci muito — e agora? Essa é a pergunta que mais chega aqui. A resposta depende de uma coisa que quase ninguém leva em conta."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#34d399"></span> PERGUNTAS E RESPOSTAS</div>
+        <div class="qa-block">
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Perdi 30kg. Tenho excesso de pele. Qual procedimento indicado?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Depende da quantidade de excesso e da sua composição corporal atual. Antes de qualquer procedimento, a prioridade é estabilizar o peso e construir massa muscular — isso muda completamente o resultado cirúrgico. O abdominoplastia é o mais comum nesse contexto, mas cada caso é avaliado individualmente.</div>
+          </div>
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Posso fazer logo depois de emagrecer?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Não recomendo. O ideal é que o peso esteja estável por pelo menos 6 meses. Operar em queda de peso ativa compromete o resultado — a pele continua cedendo.</div>
+          </div>
+          <div class="qa-item qa-pergunta">
+            <div class="qa-label p">❓ Pergunta</div>
+            <div class="qa-text">"Treino resolve ou precisa de cirurgia?"</div>
+          </div>
+          <div class="qa-item qa-resposta">
+            <div class="qa-label r">✅ Resposta</div>
+            <div class="qa-text">Treino resolve parte — melhora o contorno, preenche com músculo e reduz o aspecto flácido. Excesso de pele real, treino não remove. Mas quem treina antes da cirurgia tem resultado muito superior.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#34d399"></span> FECHAMENTO</div>
+        <div class="script-text">A conquista de emagrecer é enorme. O próximo passo é fazer isso do jeito certo — com planejamento, sem pressa e com quem entende do processo inteiro.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#34d399"></span> CTA</div>
+        <div class="cta-box">💬 "Passou por isso? Me conta sua história nos comentários."<br>📲 Me chama no direct pra conversar sobre o seu caso.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 ENDRICK -->
+  <div class="script-card th5" id="r5">
+    <div class="card-header" onclick="toggle('r5')">
+      <div class="num-badge">05</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Já viu os hábitos do Endrick? — Rotina faz o campeão</div>
+        <div class="card-tags"><span class="tag tag-trend">📈 Trend</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~55 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fbbf24"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Abrir com print ou referência ao Endrick na tela]</strong><br><br>
+          "Todo mundo fala do talento do Endrick. Mas poucos falam do que está por trás. E é exatamente isso que separa quem chega de quem poderia ter chegado."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fbbf24"></span> ROTEIRO</div>
+        <div class="script-text">Endrick treina além do tempo proposto pelo clube. Quando os outros vão embora, ele fica. Dorme às 21h — com 18 anos. Prioriza o tempo com a família e mantém a cabeça longe da fama.
+
+Isso não é coincidência. É protocolo de vida.
+
+[Virada para o ponto central]
+
+E sabe o que eu vejo no consultório todo dia? Pessoas que querem resultado de atleta de elite, mas com rotina improvisada.
+
+Acordar tarde. Dormir mal. Pular refeição. Treinar sem consistência. E achar que um suplemento ou uma medicação resolve o que a rotina não faz.
+
+Não resolve.
+
+O Endrick não é campeão só porque tem talento. É porque constrói os hábitos certos todos os dias — mesmo quando ninguém está olhando.
+
+[Olha para a câmera]
+
+Resultado de verdade é construído na rotina silenciosa. No dia que você não está com vontade, mas vai mesmo assim.
+
+Qual hábito você precisa começar hoje?</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fbbf24"></span> CTA</div>
+        <div class="cta-box">💬 "Me conta: qual é o hábito que mais te desafia manter?"<br>📌 Salva esse vídeo pra assistir nos dias que falta motivação.</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Mostrar referência do Endrick nos primeiros segundos — print de notícia ou vídeo dele treinando — para prender quem reconhece o nome. Corte rápido para o médico falando. Energia motivacional, não sermão.
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 COMEDIA -->
+  <div class="script-card th6" id="r6">
+    <div class="card-header" onclick="toggle('r6')">
+      <div class="num-badge">06</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Vídeo de Comédia — "Tipos de paciente no consultório"</div>
+        <div class="card-tags"><span class="tag tag-humor">😂 Humor</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~50 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fb923c"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Tom bem-humorado, sorrindo]</strong><br><br>
+          "Depois de anos de consultório, aprendi a identificar os tipos de paciente. Se você se reconhecer em algum — eu não vou te julgar."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fb923c"></span> ROTEIRO — personagens</div>
+        <div class="script-text">🔵 O GOOGLE MÉDICO
+"Doutor, eu pesquisei e eu acho que tenho as três doenças ao mesmo tempo."
+[Reação do médico: respiração funda]
+
+🟡 O QUE JÁ SABE A DOSE
+"Já tomei semaglutida antes por conta própria. Eu mesmo fui aumentando a dose."
+[Olha para a câmera com expressão de desespero]
+
+🟢 O DISCIPLINADO DEMAIS
+"Doutor, eu segui o protocolo. Mas adicionei mais 4 suplementos que vi no Instagram."
+[Pausa]
+"...Quais suplementos?" 
+"Não sei o nome, mas o influencer garantiu que era bom."
+
+🔴 O HONESTO (O FAVORITO)
+"Doutor, não fiz nada do que você mandou. Mas vim te contar pessoalmente."
+[Sorri]
+Esse eu respeito.
+
+[Fecha olhando para a câmera]
+"Qual desses você é? Comenta aqui — prometo que não conto pra ninguém."</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fb923c"></span> CTA</div>
+        <div class="cta-box">💬 "Qual tipo você é? 🔵🟡🟢🔴 — comenta a cor!"<br>📲 Marca aquele amigo que é o Google Médico.</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Cada personagem com uma voz/expressão diferente — o médico faz todos os papéis. Legendas coloridas na tela para cada personagem. Reação cômica entre os personagens. Esse formato de "tipos de pessoas" é um dos mais compartilhados do Instagram.
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 LISSE CLINIC -->
+  <div class="script-card th7" id="r7">
+    <div class="card-header" onclick="toggle('r7')">
+      <div class="num-badge">07</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Estou atendendo na Lisse Clinic — vem conhecer</div>
+        <div class="card-tags"><span class="tag tag-novo">🆕 Novo</span><span class="tag tag-viral">🔥 Engajamento</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="timer-badge">⏱️ ~50 segundos</div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#60a5fa"></span> HOOK</div>
+        <div class="hook-box">
+          <div class="hook-text"><strong>[Gravando dentro da clínica, mostrando o ambiente]</strong><br><br>
+          "Novidade que eu precisava contar pessoalmente. Agora você pode me encontrar aqui — e eu quero te mostrar por quê esse lugar é diferente."</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#60a5fa"></span> ROTEIRO</div>
+        <div class="script-text">[Caminhar pela clínica enquanto fala — mostrar espaços]
+
+"Estou atendendo agora na Lisse Clinic — e desde o primeiro dia aqui eu entendi por que esse espaço foi construído com tanto cuidado.
+
+[Mostrar recepção]
+Aqui você é recebido em um ambiente que foi pensado para o seu conforto desde o momento que entra.
+
+[Mostrar sala de atendimento]
+Meu consultório tem tudo que preciso pra fazer uma avaliação completa — exames, composição corporal, histórico clínico detalhado.
+
+[Mostrar estrutura geral]
+A clínica reúne especialidades que se complementam. Isso significa que, dependendo do seu caso, a gente consegue montar um protocolo integrado — sem você precisar correr de um lugar para outro.
+
+[Olha para a câmera, tom pessoal]
+Eu escolho onde trabalhar pelo que o lugar oferece ao meu paciente. E a Lisse entrega isso.
+
+Vem me conhecer. O link pra agendar está na bio."</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#60a5fa"></span> CTA</div>
+        <div class="cta-box">📍 "Endereço na bio — te espero aqui."<br>💬 "Manda 'QUERO AGENDAR' no direct e eu te respondo."</div>
+      </div>
+      <div class="tip-box">
+        <strong>🎬 Dica de gravação</strong>
+        Gravar caminhando pela clínica — câmera na mão, tom de tour. Mostrar detalhes que transmitem sofisticação e cuidado. Iluminação e limpeza do espaço são tudo nesse tipo de vídeo. Pode adicionar trilha suave ao fundo.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== SUGESTÕES ======================== -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">💡 3 Sugestões Extras</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <!-- SUG 1 -->
+  <div class="script-card sugestao ths1" id="s1">
+    <div class="card-header" onclick="toggle('s1')">
+      <div class="num-badge">S1</div>
+      <div class="card-title-wrap">
+        <div class="card-title">O que ninguém te conta sobre recuperação pós-procedimento</div>
+        <div class="card-sub">Formato: educativo com revelação</div>
+        <div class="card-tags"><span class="tag tag-sug">💡 Sugestão</span><span class="tag tag-edu">🧠 Educativo</span><span class="tag tag-viral">🔥 Viral</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fbbf24"></span> POR QUE FUNCIONA</div>
+        <div class="script-text">Todo mundo pesquisa sobre o procedimento — mas quase ninguém fala sobre o que vem depois. Esse vídeo captura quem já decidiu fazer e precisa saber o que esperar: sono, alimentação proteica, repouso, quando voltar a treinar, cuidados com a cicatriz.
+
+Conecta diretamente com a especialidade do Dr. Yeiko — medicina esportiva + estética — porque ele pode falar sobre a recuperação de forma mais completa do que um médico puramente estético.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#fbbf24"></span> HOOK SUGERIDO</div>
+        <div class="hook-box">
+          <div class="hook-text">"Você pesquisou tudo sobre o procedimento. Mas sabe o que acontece nos 7 dias depois? Isso define o seu resultado."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUG 2 -->
+  <div class="script-card sugestao ths2" id="s2">
+    <div class="card-header" onclick="toggle('s2')">
+      <div class="num-badge">S2</div>
+      <div class="card-title-wrap">
+        <div class="card-title">"Fui fazer um procedimento estético e quase me arrependi" — relato de paciente</div>
+        <div class="card-sub">Formato: depoimento real + orientação médica</div>
+        <div class="card-tags"><span class="tag tag-sug">💡 Sugestão</span><span class="tag tag-viral">🔥 Viral</span><span class="tag tag-trend">📈 Trend</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#f87171"></span> POR QUE FUNCIONA</div>
+        <div class="script-text">Relatos reais de pacientes (com autorização) que passaram por experiências negativas com procedimentos sem acompanhamento adequado — e como mudou depois de ter orientação médica correta.
+
+Esse formato gera identificação imediata, é altamente compartilhável e posiciona o médico como referência em fazer o procedimento do jeito certo. É a versão estética do vídeo da Priscila.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#f87171"></span> HOOK SUGERIDO</div>
+        <div class="hook-box">
+          <div class="hook-text">"Ela fez um procedimento estético em outro lugar e o resultado não foi o que esperava. Quando chegou até mim, a gente recomeçou do jeito certo. Deixa eu te contar."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUG 3 -->
+  <div class="script-card sugestao ths3" id="s3">
+    <div class="card-header" onclick="toggle('s3')">
+      <div class="num-badge">S3</div>
+      <div class="card-title-wrap">
+        <div class="card-title">Médico reage a conselho de saúde do Instagram</div>
+        <div class="card-sub">Formato: react / dueto com vídeo viral</div>
+        <div class="card-tags"><span class="tag tag-sug">💡 Sugestão</span><span class="tag tag-humor">😂 Humor</span><span class="tag tag-trend">📈 Trend</span></div>
+      </div>
+      <div class="toggle-btn">+</div>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#a3e635"></span> POR QUE FUNCIONA</div>
+        <div class="script-text">Pegar um vídeo viral de "conselho de saúde" duvidoso — sobre dieta, suplemento, emagrecimento ou estética — e reagir de forma bem-humorada mas embasada.
+
+Formato de react é um dos mais virais do Instagram e do TikTok. Gera engajamento alto por discordância saudável, posiciona o médico como autoridade com leveza e traz o humor que o perfil precisa para equilibrar os conteúdos mais sérios.
+
+Pode ser feito toda semana com temas diferentes — é formato recorrente.</div>
+      </div>
+      <div class="section">
+        <div class="section-label"><span class="dot" style="background:#a3e635"></span> HOOK SUGERIDO</div>
+        <div class="hook-box">
+          <div class="hook-text">"Esse vídeo chegou no meu direct com a pergunta: 'doutor, isso é verdade?' Deixa eu reagir ao vivo."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">Roteiros Avançados · Dr. Yeiko · Estética & Performance · 2025</div>
+
+<script>
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+    el.querySelector('.toggle-btn').textContent = el.classList.contains('open') ? '−' : '+';
+  }
+</script>
+</body>
+</html>
